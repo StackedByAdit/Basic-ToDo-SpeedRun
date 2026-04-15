@@ -139,7 +139,7 @@ app.get("/todos", authMiddleware, (req: Request, res: Response) => {
   });
 })
 
-app.delete("todos/:id", authMiddleware,  (req: Request, res: Response) => {
+app.delete("/todo/:id", authMiddleware,  (req: Request, res: Response) => {
   const todoId = Number(req.params.id);
   const userId = req.user?.userId;
 
