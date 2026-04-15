@@ -7,12 +7,12 @@ export interface User {
 
 export interface Todo {
     id : number;
-    userId : number;
+    userId : string;
     title : string
 }
 
 export interface Payload {
-    userId : number;
+    userId : string;
     username : string
 }
 
