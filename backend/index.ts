@@ -139,6 +139,37 @@ app.get("/todos", authMiddleware, (req: Request, res: Response) => {
   });
 })
 
+app.delete("todos/:id", authMiddleware,  (req: Request, res: Response) => {
+  const todoId = Number(req.params.id);
+  const userId = req.user?.userId;
+
+  if (!userId) {
+    return res.status(403).json({
+      success: false,
+      message: "Unauthorized",
+    });
+  }
+
+  const todoIndex = todos.findIndex(
+    (t) => t.id === todoId && t.userId === userId
+  );
+
+  if (todoIndex === -1) {
+    return res.status(404).json({
+      success: false,
+      message: "Todo not found or not yours",
+    });
+  }
+
+  const deletedTodo = todos.splice(todoIndex, 1)[0];
+
+  res.status(200).json({
+    success: true,
+    message: "Todo deleted",
+    todo: deletedTodo,
+  });
+})
+
 app.listen(PORT, () => {
   console.log(`Backend running on http://localhost:${PORT}`);
 });
