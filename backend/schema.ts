@@ -13,6 +13,5 @@ export const signinSchema = z.object({
 })
 
 export const todoSchema = z.object({
-    id : z.number(),
     title : z.string()
 })
