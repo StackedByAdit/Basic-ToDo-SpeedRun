@@ -8,7 +8,7 @@
     }
 
     export function authMiddleware(req: AuthRequest, res: Response, next: NextFunction) {
-        const header = req.headers.token as string;
+         const header = req.headers.authorization as string;
 
         if (!header) {
             return res.status(403).json({
