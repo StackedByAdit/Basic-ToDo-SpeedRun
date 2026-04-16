@@ -1,7 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
 
+import { useNavigate } from "react-router-dom";
+
 export const Login = () => {
+
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -24,14 +28,20 @@ export const Login = () => {
             const token = res.data.token;
 
             console.log(token);
-            
+
             localStorage.setItem("token", token)
+
+            navigate("/todos");
 
             setEmail("");
             setPassword("");
 
-        } catch (err: any) {
-            console.log(err.response.data);
+        } catch (err: unknown) {
+            if (axios.isAxiosError(err)) {
+                console.error(err.response?.data);
+            } else {
+                console.error(err);
+            }
         }
     }
 
