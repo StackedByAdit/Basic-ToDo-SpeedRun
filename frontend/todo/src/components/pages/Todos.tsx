@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useEffect, useState } from 'react'
 import InputBox from '../InputBox'
 import axios from 'axios'
 import DeleteButton from '../DeleteButton'
@@ -10,22 +10,26 @@ type Todo = {
 
 export const Todos = () => {
 
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem("token") || "";
     const [todos, setTodos] = useState<Todo[]>([]);
 
-    const fetchTodos = useCallback(async () => {
-  try {
-    const res = await axios.get("http://localhost:8000/todos", {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+    const fetchTodos = async () => {
+        try {
+            const res = await axios.get("http://localhost:8000/todos", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
 
-    setTodos(res.data.todos);
-  } catch (err) {
-    console.log(err);
-  }
-}, [token]);
+            setTodos(res.data.todos);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    useEffect(() => {
+        fetchTodos();
+    }, [token]);
 
     return (
         <div className="text-amber-100 flex flex-col gap-5">
@@ -35,7 +39,7 @@ export const Todos = () => {
 
             <div className='flex flex-col gap-5'>
                 {todos.map((todo: Todo) => (
-                    <div className='flex flex-row justify-between' key={todo.id}>
+                    <div className='flex flex-row justify-between items-center' key={todo.id}>
                         {todo.title}
 
                         <DeleteButton
@@ -50,5 +54,4 @@ export const Todos = () => {
         </div>
     )
 }
-
 export default Todos;
