@@ -18,6 +18,9 @@ declare global {
 const app = express();
 app.use(express.json());
 
+import cors from "cors";
+app.use(cors());
+
 const PORT = 8000;
 export const SECRET = "123456789"
 
