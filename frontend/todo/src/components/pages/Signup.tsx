@@ -1,7 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
 
+import { useNavigate } from "react-router-dom";
+
 export const Signup = () => {
+
+    const navigate = useNavigate();
 
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -24,19 +28,25 @@ export const Signup = () => {
             console.log(res.data);
 
 
+            navigate("/login");
+
             setUsername("");
             setEmail("");
             setPassword("");
 
-        } catch (err: any) {
-            console.log(err.response.data);
+        } catch (err: unknown) {
+            if (axios.isAxiosError(err)) {
+                console.error(err.response?.data);
+            } else {
+                console.error(err);
+            }
         }
     }
 
     return (
-        
+
         <div className="flex flex-col gap-10 text-amber-50" >
-             <div>
+            <div>
                 <input type="text" placeholder="enter username" onChange={(e) => { setUsername(e.target.value) }} value={username} />
             </div>
             <div>
