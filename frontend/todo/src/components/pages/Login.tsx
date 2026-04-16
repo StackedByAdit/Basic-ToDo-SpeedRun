@@ -18,8 +18,14 @@ export const Login = () => {
                         "Content-Type": "application/json",
                     }
                 })
-
             console.log(res.data);
+
+
+            const token = res.data.token;
+
+            console.log(token);
+            
+            localStorage.setItem("token", token)
 
             setEmail("");
             setPassword("");

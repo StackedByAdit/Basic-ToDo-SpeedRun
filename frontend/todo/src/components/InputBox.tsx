@@ -4,17 +4,25 @@ import { useState } from "react";
 export const InputBox = () => {
   const [input, setInput] = useState("");
 
+  const token = localStorage.getItem("token");
+
   const handleSubmit = async () => {
     if (!input) return;
 
     try {
-      await axios.post("http://localhost:8000/todo", {
-        text: input,
+      const res = await axios.post("http://localhost:8000/todo", {
+        title: input,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       });
 
+      console.log(res.data);
+
       setInput("");
-    } catch (err) {
-      console.error(err);
+    } catch (err: any) {
+      console.error(err.response.data);
     }
   };
 
