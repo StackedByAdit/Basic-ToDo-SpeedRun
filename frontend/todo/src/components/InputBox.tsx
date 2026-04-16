@@ -1,7 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
 
-export const InputBox = () => {
+type Todo = {
+  id: number;
+  title: string;
+};
+
+export const InputBox = ({ onAdd }: { onAdd: (todo: Todo) => void }) => {
   const [input, setInput] = useState("");
 
   const token = localStorage.getItem("token");
@@ -20,9 +25,17 @@ export const InputBox = () => {
 
       console.log(res.data);
 
+      onAdd(res.data.todo);
+
       setInput("");
-    } catch (err: any) {
-      console.error(err.response.data);
+
+
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        console.error(err.response?.data);
+      } else {
+        console.error(err);
+      }
     }
   };
 
