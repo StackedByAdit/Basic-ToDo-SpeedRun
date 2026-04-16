@@ -34,8 +34,9 @@ export const Signup = () => {
     }
 
     return (
+        
         <div className="flex flex-col gap-10 text-amber-50" >
-            <div>
+             <div>
                 <input type="text" placeholder="enter username" onChange={(e) => { setUsername(e.target.value) }} value={username} />
             </div>
             <div>
