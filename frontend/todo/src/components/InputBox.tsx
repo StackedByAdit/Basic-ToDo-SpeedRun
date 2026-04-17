@@ -40,8 +40,11 @@ export const InputBox = ({ onAdd }: { onAdd: (todo: Todo) => void }) => {
   };
 
   return (
-    <div className="text-amber-100">
-      <input
+    <div className="flex flex-row items-center justify-center p-5 gap-5 text-amber-50
+         bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl
+         bg-gradient-to-r from-gray-900 to-white-900
+         shadow-[0_0_20px_rgba(111,111,111,0.4)]">
+      <input className="border-1 hover:scale-110 transition duration-200 active:scale-95 hover:bg-gray-800 rounded-2xl p-5"
         placeholder="enter the task"
         value={input}
         onChange={(e) => {
