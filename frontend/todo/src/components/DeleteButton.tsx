@@ -19,7 +19,8 @@ export const DeleteButton = ({ id, onDelete }: { id: number, onDelete: () => voi
     };
 
     return (
-        <button onClick={handleDelete}>
+        <button className="bg-red-900 hover:bg-red-600 text-white text-sm px-3 py-1 rounded-md transition duration-200"
+         onClick={handleDelete} >
             Delete
         </button>
     );
