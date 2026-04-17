@@ -39,7 +39,7 @@ export const Todos = () => {
 
             <div className='flex flex-col gap-5'>
                 {todos.map((todo: Todo) => (
-                    <div className='flex flex-row justify-between items-center' key={todo.id}>
+                    <div className='flex items-center justify-between bg-gray-800 text-white px-4 py-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-200' key={todo.id}>
                         {todo.title}
 
                         <DeleteButton
