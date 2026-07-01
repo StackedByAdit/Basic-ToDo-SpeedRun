@@ -67,7 +67,6 @@ app.post("/signup", async (req: Request, res: Response) => {
 app.post("/signin", (req: Request, res: Response) => {
 
   const response = signinSchema.safeParse(req.body);
-  console.log(response);
 
   if (!response.success) {
     return res.status(403).json({
