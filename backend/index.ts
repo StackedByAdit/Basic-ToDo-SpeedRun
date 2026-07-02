@@ -76,7 +76,6 @@ app.post("/signin", (req: Request, res: Response) => {
   }
 
   const data = response.data;
-  console.log(data);
 
   const token = jwt.sign({ userId: data.email }, SECRET)
 
