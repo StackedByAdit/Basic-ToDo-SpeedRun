@@ -78,6 +78,7 @@ app.post("/signin", (req: Request, res: Response) => {
   const data = response.data;
 
   const token = jwt.sign({ userId: data.email }, SECRET)
+  console.log(token);
 
   res.status(200).json({
     success: true,
